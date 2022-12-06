@@ -52,6 +52,8 @@ public class ReviewRequest extends AppCompatActivity implements AddRequestDialog
             }
         });
 
+
+
         requestList = new ArrayList<Request>();
 
         // use a linear layout manager for the recycler view

@@ -1,10 +1,12 @@
 package edu.uga.cs.athensrideshare;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +39,7 @@ public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecycler
         TextView seats;
         TextView social;
         TextView fuel;
+        Button accept;
 
 
         public requestHolder(View itemView) {
@@ -52,6 +55,7 @@ public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecycler
             seats = itemView.findViewById(R.id.seatsList);
             social = itemView.findViewById(R.id.socialList);
             fuel = itemView.findViewById(R.id.fuelList);
+            accept = itemView.findViewById(R.id.button3);
 
         }
     }
@@ -92,6 +96,15 @@ public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecycler
         holder.seats.setText( request.getSeats());
         holder.social.setText( request.getSocial());
         holder.fuel.setText( request.getSocial());
+
+        holder.accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), acceptedRequest.class);
+                intent.putExtra("position", request.getKey());
+                view.getContext().startActivity(intent);
+            }
+        });
 
 
         // We can attach an OnClickListener to the itemView of the holder;
