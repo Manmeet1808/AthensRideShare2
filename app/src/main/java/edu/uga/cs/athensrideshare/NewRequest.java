@@ -51,6 +51,11 @@ public class NewRequest extends AppCompatActivity {
         saveButton.setOnClickListener( new ButtonClickListener()) ;
     }
 
+    /**
+     * This class retrieves the information input by the user in order to create a new request and converts
+     * it to a string format. A Request object is then created using the information and stored in the Firebase
+     * Database.
+     */
     private class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {

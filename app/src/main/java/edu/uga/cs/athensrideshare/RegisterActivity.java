@@ -25,6 +25,9 @@ import com.google.firebase.auth.MultiFactorResolver;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * This class implements the register function.
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     public static final String TAG = "Sign in Activity";
@@ -37,7 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText emailText;
     private EditText passwordText;
     private FirebaseDatabase database;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,35 +61,37 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
-     * Registers a user using the information they gave us in the app
+     * This class registers a new user in the app with information input by the user.
      */
     private class ButtonClickListener implements View.OnClickListener {
 
         /**
-         * When clicked, registers a user
-         *
-         * @param v the button view that has called the method
+         * Information input by the user is converted to a string format and then is sent to a method
+         * in order to create the account.
+         * @param v
          */
         @Override
         public void onClick(View v) {
-            //gets values from information entered
+
             String firstName = firstNameText.getText().toString();
             String lastName = lastNameText.getText().toString();
             String email = emailText.getText().toString();
             String password = passwordText.getText().toString();
 
-            // Create new user object to be pushed into db
-            //final User currUser = new User( firstName, lastName, email );
-            //private User currUser = new User(null, email, null, firstName, null);
+            // Creates a new user object in the database
             createAccount(email, password, firstName);
         }
     }
 
-
+    /**
+     * Creates the account with the user input.
+     * @param email
+     * @param password
+     * @param firstName
+     */
     private void createAccount(String email, String password, String firstName) {
         Log.d(TAG, "account created - " + email);
 
-        // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -102,10 +106,9 @@ public class RegisterActivity extends AppCompatActivity {
                     myRef.child( userID ).setValue( user ).addOnSuccessListener( new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    // Show a quick confirmation
+                                    //Welcome back message displays if the user signs in successfully
                                     Toast.makeText(getApplicationContext(), "Welcome " + firstName + "!", Toast.LENGTH_SHORT).show();
 
-                                    // Clear the EditTexts for next use.
                                     firstNameText.setText("");
                                     lastNameText.setText("");
                                     emailText.setText("");
@@ -121,8 +124,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     updateUI(user);
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w(TAG, "account not created", task.getException());
+                    // Displays an Authentication Failed message to the user when the account fails to create
                     Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }
 
@@ -131,11 +134,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
-     * This is called on a successful registration. When someone registers,
-     * this method will update the UI to now go to the MainNavigationActivity and display a
-     * successful registration message.
-     *
-     * @param account the current FirebaseUser's information
+     * When someone successfully registers, this updates the information in the Firebase database
+     * @param account - the user information for this account
      */
     public void updateUI(FirebaseUser account){
 

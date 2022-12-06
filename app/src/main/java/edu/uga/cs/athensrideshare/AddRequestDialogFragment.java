@@ -52,7 +52,7 @@ public class AddRequestDialogFragment extends DialogFragment {
         socialView = layout.findViewById( R.id.editText9 );
         fuelView = layout.findViewById( R.id.editText10 );
 
-
+        //creates the dialog for a new request form to open
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogStyle);
         builder.setView(layout);
 

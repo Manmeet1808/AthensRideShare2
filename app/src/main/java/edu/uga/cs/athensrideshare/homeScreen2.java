@@ -90,6 +90,23 @@ public class homeScreen2 extends AppCompatActivity {
         }
     }
 
+    /**
+     * This class defines the onClickListener class for the logout button.
+     * Signs the current user out and returns to MainActivity.
+     */
+    private class LogOutClickListener implements View.OnClickListener {
 
+        /**
+         * Signs out the current user and returns to the MainActivity login/register screen.
+         * @param v the button view that has called the method
+         */
+        @Override
+        public void onClick(View v) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(v.getContext(), MainActivity.class);
+            v.getContext().startActivity(intent);
+        }
+    }
 
 }
+

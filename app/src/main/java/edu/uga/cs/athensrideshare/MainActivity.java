@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Sends the user to the registration screen
     public class RegisterClickListener implements View.OnClickListener {
 
         @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Sends the user to a page to login to their account
     public class LoginClickListener implements View.OnClickListener {
 
         @Override

@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText enterEmail;
     private EditText enterPassword;
 
+    //Creates the basic necessary information for logging in
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +41,17 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    // Gets the current user
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseUser currUser = mAuth.getCurrentUser();
     }
 
+    /**
+     * This is a listener for the login button. It converts the user input to strings
+     * and then calls the method to log into their account with that information.
+     */
     private class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -56,6 +62,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Signs the user in with the login information provided
+     * @param email - email that the user input
+     * @param password - password that the user input
+     */
     private void signIn(String email, String password) {
         Log.d(TAG, "signIn" + email);
 
@@ -73,6 +84,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * When the user signs in successfully, the user will see a welcome back message and
+     * will be redirected to the home screen of the app
+     * @param userAccount
+     */
     public void updateUserInfo(FirebaseUser userAccount) {
         if (userAccount != null) {
             Toast.makeText(this, "Welcome Back!", Toast.LENGTH_LONG).show();

@@ -49,6 +49,11 @@ public class NewOffer extends AppCompatActivity {
         saveButton.setOnClickListener( new ButtonClickListener()) ;
     }
 
+    /**
+     * This class retrieves the information input by the user in order to create a new offer and converts
+     * it to a string format. An Offer object is then created using the information and stored in the Firebase
+     * Database.
+     */
     private class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
