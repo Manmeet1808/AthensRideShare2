@@ -69,6 +69,7 @@ public class AddRequestDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    //Creates a new Request object from data input by the user
     private class AddRequestListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -85,15 +86,13 @@ public class AddRequestDialogFragment extends DialogFragment {
             String fuel = fuelView.getText().toString();
 
 
-
-
-            // create a new JobLead object
+            // create a new Request object
             Request request = new Request( fullName, age, phone, start, dest, date, time, seats, social, fuel );
 
-            // get the Activity's listener to add the new job lead
+            // get the Activity's listener to add the new request
             AddRequestDialogListener listener = (AddRequestDialogListener) getActivity();
 
-            // add the new job lead
+            // add the new request
             listener.addRequest( request );
 
             // close the dialog
