@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +24,6 @@ public class homeScreen2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen2);
-        //hello
 
         Log.d( DEBUG_TAG, "homescreen.onCreate()" );
 
@@ -31,12 +31,14 @@ public class homeScreen2 extends AppCompatActivity {
         Button reviewLeadsButton = findViewById(R.id.button2);
         Button newRequestButton = findViewById(R.id.button4);
         Button reviewRequestButton = findViewById(R.id.button5);
-        signedInTextView = findViewById( R.id.textView3 );
+        Button logoutButton = findViewById(R.id.button6);
 
+        // Upon each button being clicked, the corresponding listener shall be called
         newLeadButton.setOnClickListener( new NewLeadButtonClickListener() );
         reviewLeadsButton.setOnClickListener( new ReviewLeadsButtonClickListener() );
         newRequestButton.setOnClickListener( new NewRequestButtonClickListener() );
         reviewRequestButton.setOnClickListener( new ReviewRequestButtonClickListener() );
+        logoutButton.setOnClickListener( new LogOutClickListener() );
 
         // Setup a listener for a change in the sign in status (authentication status change)
         // when it is invoked, check if a user is signed in and update the UI text view string,
@@ -52,7 +54,6 @@ public class homeScreen2 extends AppCompatActivity {
                 } else {
                     // User is signed out
                     Log.d( DEBUG_TAG, "onAuthStateChanged:signed_out" );
-                    //signedInTextView.setText( "Signed in as: not signed in" );
                 }
             }
         });
@@ -90,16 +91,7 @@ public class homeScreen2 extends AppCompatActivity {
         }
     }
 
-    /**
-     * This class defines the onClickListener class for the logout button.
-     * Signs the current user out and returns to MainActivity.
-     */
     private class LogOutClickListener implements View.OnClickListener {
-
-        /**
-         * Signs out the current user and returns to the MainActivity login/register screen.
-         * @param v the button view that has called the method
-         */
         @Override
         public void onClick(View v) {
             FirebaseAuth.getInstance().signOut();

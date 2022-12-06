@@ -21,7 +21,7 @@
 
     <Button
         android:id="@+id/regButton"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:text="Register"
         app:layout_constraintBottom_toTopOf="@+id/logButton"
@@ -32,7 +32,7 @@
 
     <Button
         android:id="@+id/logButton"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
