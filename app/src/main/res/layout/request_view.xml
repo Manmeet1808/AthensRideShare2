@@ -23,7 +23,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/nameList"
+                android:id="@+id/nameR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -31,25 +31,16 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/ageList"
+                android:id="@+id/ageR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="TextView"
                 android:autoLink="phone"
-                android:text="TextView"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/phoneList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autoLink="phone"
-                android:text="TextView"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/startList"
+                android:id="@+id/phoneR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -58,7 +49,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/destinationList"
+                android:id="@+id/startR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -67,7 +58,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dateList"
+                android:id="@+id/destinationR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="web|email"
@@ -76,7 +67,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/timeList"
+                android:id="@+id/dateR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="web|email"
@@ -85,7 +76,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/seatsList"
+                android:id="@+id/timeR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="web|email"
@@ -94,7 +85,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/socialList"
+                android:id="@+id/seatsR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="web|email"
@@ -103,7 +94,16 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/fuelList"
+                android:id="@+id/socialR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web|email"
+                android:text="TextView"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fuelR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="web|email"
@@ -112,7 +112,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/reqAccept"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Accept Request" />

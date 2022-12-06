@@ -1,6 +1,7 @@
 package edu.uga.cs.athensrideshare;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,9 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecyclerAdapter.requestHolder> {
@@ -20,6 +23,7 @@ public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecycler
 
     private List<Request> requestList;
     private Context context;
+    AlertDialog.Builder build;
 
     public requestRecyclerAdapter(List<Request> requestList, Context context) {
         this.requestList  = requestList;
@@ -45,17 +49,18 @@ public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecycler
         public requestHolder(View itemView) {
             super(itemView);
 
-            name = itemView.findViewById(R.id.nameList);
-            age = itemView.findViewById(R.id.ageList);
-            number = itemView.findViewById(R.id.phoneList);
-            start = itemView.findViewById(R.id.startList);
-            destination = itemView.findViewById(R.id.destinationList);
-            date = itemView.findViewById(R.id.dateList);
-            time = itemView.findViewById(R.id.timeList);
-            seats = itemView.findViewById(R.id.seatsList);
-            social = itemView.findViewById(R.id.socialList);
-            fuel = itemView.findViewById(R.id.fuelList);
-            accept = itemView.findViewById(R.id.button3);
+            name = itemView.findViewById(R.id.nameR);
+            age = itemView.findViewById(R.id.ageR);
+            number = itemView.findViewById(R.id.phoneR);
+            start = itemView.findViewById(R.id.startR);
+            destination = itemView.findViewById(R.id.destinationR);
+            date = itemView.findViewById(R.id.dateR);
+            time = itemView.findViewById(R.id.timeR);
+            seats = itemView.findViewById(R.id.seatsR);
+            social = itemView.findViewById(R.id.socialR);
+            fuel = itemView.findViewById(R.id.fuelR);
+            accept = itemView.findViewById(R.id.reqAccept);
+            build = new AlertDialog.Builder(accept.getContext());
 
         }
     }
@@ -71,19 +76,32 @@ public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecycler
     public void onBindViewHolder( requestHolder holder, int position ) {
         Request request = requestList.get( position );
 
+        ArrayList<String> send = new ArrayList<String>();
+
         Log.d( DEBUG_TAG, "onBindViewHolder: " + request );
 
         String key = request.getKey();
+        send.add(key);
         String name = request.getName();
+        send.add(name);
         String age = request.getAge();
+        send.add(age);
         String number = request.getNumber();
+        send.add(number);
         String start = request.getStart();
+        send.add(start);
         String dest = request.getDestination();
+        send.add(dest);
         String date = request.getDate();
+        send.add(date);
         String time = request.getTime();
+        send.add(time);
         String seats = request.getSeats();
+        send.add(seats);
         String social = request.getSocial();
+        send.add(social);
         String fuel = request.getFuel();
+        send.add(fuel);
 
 
         holder.name.setText( request.getName());
@@ -97,12 +115,29 @@ public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecycler
         holder.social.setText( "Social : " + request.getSocial());
         holder.fuel.setText( "Will Split on Fuel : " + request.getSocial());
 
+
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), acceptedRequest.class);
-                intent.putExtra("position", request.getKey());
-                view.getContext().startActivity(intent);
+               build.setTitle("CONFIRM").setMessage("Would you like to confirm?")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(view.getContext(), acceptedRequest.class);
+                                intent.putExtra("list", send);
+                                view.getContext().startActivity(intent);
+                                holder.accept.setEnabled(false);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        }).show();
+//                Intent intent = new Intent(view.getContext(), acceptedRequest.class);
+//                intent.putExtra("list", send);
+//                view.getContext().startActivity(intent);
             }
         });
 

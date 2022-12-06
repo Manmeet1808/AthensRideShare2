@@ -1,16 +1,21 @@
 package edu.uga.cs.athensrideshare;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class offerRecyclerAdapter extends RecyclerView.Adapter<offerRecyclerAdapter.offerHolder> {
@@ -18,6 +23,7 @@ public class offerRecyclerAdapter extends RecyclerView.Adapter<offerRecyclerAdap
 
     private List<Offer> offerList;
     private Context context;
+    AlertDialog.Builder build;
 
     public offerRecyclerAdapter(List<Offer> offerList, Context context) {
         this.offerList  = offerList;
@@ -36,6 +42,8 @@ public class offerRecyclerAdapter extends RecyclerView.Adapter<offerRecyclerAdap
         TextView time;
         TextView seats;
         TextView social;
+        Button acceptO;
+      //  AlertDialog.Builder build;
 
 
         public offerHolder(View itemView) {
@@ -50,6 +58,8 @@ public class offerRecyclerAdapter extends RecyclerView.Adapter<offerRecyclerAdap
             time = itemView.findViewById(R.id.timeList);
             seats = itemView.findViewById(R.id.seatsList);
             social = itemView.findViewById(R.id.socialList);
+            acceptO = itemView.findViewById(R.id.accept);
+            build = new AlertDialog.Builder(acceptO.getContext());
 
         }
     }
@@ -65,18 +75,30 @@ public class offerRecyclerAdapter extends RecyclerView.Adapter<offerRecyclerAdap
     public void onBindViewHolder( offerHolder holder, int position ) {
         Offer offer = offerList.get( position );
 
+        ArrayList<String> sendO = new ArrayList<String>();
+
         Log.d( DEBUG_TAG, "onBindViewHolder: " + offer );
 
         String key = offer.getKey();
+        sendO.add(key);
         String name = offer.getName();
+        sendO.add(name);
         String age = offer.getAge();
+        sendO.add(age);
         String number = offer.getNumber();
+        sendO.add(number);
         String start = offer.getStart();
+        sendO.add(start);
         String dest = offer.getDestination();
+        sendO.add(dest);
         String date = offer.getDate();
+        sendO.add(date);
         String time = offer.getTime();
+        sendO.add(time);
         String seats = offer.getSeats();
+        sendO.add(seats);
         String social = offer.getSocial();
+        sendO.add(social);
 
 
         holder.name.setText( offer.getName());
@@ -88,6 +110,36 @@ public class offerRecyclerAdapter extends RecyclerView.Adapter<offerRecyclerAdap
         holder.time.setText( "Leaving At : " + offer.getTime());
         holder.seats.setText( "Number of Available Seats : " + offer.getSeats());
         holder.social.setText( "Social : " + offer.getSocial());
+
+        holder.acceptO.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                build.setTitle("CONFIRM").setMessage("Would you like to confirm?")
+                        .setCancelable(true)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent(view.getContext(), acceptedOffer.class);
+                                intent.putExtra("myList", sendO);
+                                view.getContext().startActivity(intent);
+                                holder.acceptO.setEnabled(false);
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        }).show();
+
+//                                 Intent intent = new Intent(view.getContext(), acceptedOffer.class);
+//                                intent.putExtra("myList", sendO);
+//                                view.getContext().startActivity(intent);
+//                                holder.acceptO.setEnabled(false);
+
+            }
+        });
+
+
 
 
         // We can attach an OnClickListener to the itemView of the holder;
