@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "501076547142",
+    "firebase_url": "https://athensrideshare-ee820-default-rtdb.firebaseio.com",
+    "project_id": "athensrideshare-ee820",
+    "storage_bucket": "athensrideshare-ee820.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501076547142:android:fe5408b57d613cde4b1c47",
+        "android_client_info": {
+          "package_name": "edu.uga.cs.athensrideshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501076547142-qd8a3q4g0qdmi5bcbg1ifcactjpuhp96.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcLOeQlHufQHfu-jtqSSN4tNbm8auas8A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501076547142-qd8a3q4g0qdmi5bcbg1ifcactjpuhp96.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

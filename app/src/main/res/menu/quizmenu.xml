@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/review_requests"
+
+            android:orderInCategory="1"
+            android:title="Review Requests"
+            app:showAsAction="ifRoom|withText" />
+
+        <item
+            android:id="@+id/review_offers"
+
+            android:orderInCategory="2"
+            android:title="Review Offers"
+            app:showAsAction="ifRoom|withText" />
+
+        <item
+            android:id="@+id/accepted_offer"
+            android:title="Accepted Offers" />
+        <item
+            android:id="@+id/accepted_request"
+            android:title="Accepted Request" />
+        <item
+            android:id="@+id/check_points"
+            android:orderInCategory="3"
+            android:title="Check Points"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/logout"
+            android:orderInCategory="4"
+            android:title="Logout"
+            app:showAsAction="ifRoom|withText" />
+
+    </group>
+</menu>
