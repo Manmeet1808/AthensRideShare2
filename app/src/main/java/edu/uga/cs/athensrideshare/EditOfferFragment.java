@@ -94,7 +94,7 @@ public class EditOfferFragment extends DialogFragment {
         seatsText = layout.findViewById( R.id.editText8 );
         socialText = layout.findViewById( R.id.editText9 );
 
-        // Pre-fill the edit texts with the current values for this job lead.
+        // Pre-fill the edit texts with the current values for this offer.
         // The user will be able to modify them.
         nameText.setText(name);
         ageText.setText(age);
@@ -148,9 +148,9 @@ public class EditOfferFragment extends DialogFragment {
             Offer offer = new Offer( name, age, phone, start, dest, date, time, seats, social );
             offer.setKey( key );
 
-            // get the Activity's listener to add the new job lead
+            // get the Activity's listener to add the new offer
             EditOfferListener listener = (EditOfferFragment.EditOfferListener) getActivity();
-            // add the new job lead
+            // add the new offer
             listener.updateOffer( position, offer, SAVE );
 
             // close the dialog
@@ -165,8 +165,8 @@ public class EditOfferFragment extends DialogFragment {
             Offer offer = new Offer( name, age, phone, start, dest, date, time, seats, social );
             offer.setKey( key );
 
-            // get the Activity's listener to add the new job lead
-            EditOfferFragment.EditOfferListener listener = (EditOfferFragment.EditOfferListener) getActivity();            // add the new job lead
+            // get the Activity's listener to add the new offer
+            EditOfferFragment.EditOfferListener listener = (EditOfferFragment.EditOfferListener) getActivity();
             listener.updateOffer( position, offer, DELETE );
             // close the dialog
             dismiss();

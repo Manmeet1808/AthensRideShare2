@@ -69,15 +69,13 @@ public class NewOffer extends AppCompatActivity {
 
             final Offer offer = new Offer(name, age, num, start, dest, date, time, seat, social );
 
-            // Add a new element (JobLead) to the list of job leads in Firebase.
+            // Add a new element (Offer) to the list of offers in Firebase.
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("offers");
 
             // First, a call to push() appends a new node to the existing list (one is created
             // if this is done for the first time).  Then, we set the value in the newly created
-            // list node to store the new job lead.
-            // This listener will be invoked asynchronously, as no need for an AsyncTask, as in
-            // the previous apps to maintain job leads.
+            // list node to store the new offer.
             myRef.push().setValue( offer )
                     .addOnSuccessListener( new OnSuccessListener<Void>() {
                         @Override

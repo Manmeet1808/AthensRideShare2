@@ -25,8 +25,8 @@ public class AddRequestDialogFragment extends DialogFragment {
     private EditText socialView;
     private EditText fuelView;
 
-    // This interface will be used to obtain the new job lead from an AlertDialog.
-    // A class implementing this interface will handle the new job lead, i.e. store it
+    // This interface will be used to obtain the new request from an AlertDialog.
+    // A class implementing this interface will handle the new request, i.e. store it
     // in Firebase and add it to the RecyclerAdapter.
     public interface AddRequestDialogListener {
         void addRequest(Request request);
@@ -73,7 +73,7 @@ public class AddRequestDialogFragment extends DialogFragment {
     private class AddRequestListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            // get the new job lead data from the user
+            // get the new request data from the user
             String fullName = nameView.getText().toString();
             String age = ageView.getText().toString();
             String phone = phoneView.getText().toString();
@@ -84,7 +84,6 @@ public class AddRequestDialogFragment extends DialogFragment {
             String seats = seatsView.getText().toString();
             String social = socialView.getText().toString();
             String fuel = fuelView.getText().toString();
-
 
             // create a new Request object
             Request request = new Request( fullName, age, phone, start, dest, date, time, seats, social, fuel );

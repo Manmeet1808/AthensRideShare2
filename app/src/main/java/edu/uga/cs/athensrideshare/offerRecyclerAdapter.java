@@ -80,22 +80,21 @@ public class offerRecyclerAdapter extends RecyclerView.Adapter<offerRecyclerAdap
 
 
         holder.name.setText( offer.getName());
-        holder.age.setText( offer.getAge());
-        holder.number.setText( offer.getNumber());
-        holder.start.setText( offer.getStart());
-        holder.destination.setText( offer.getDestination());
-        holder.date.setText( offer.getDate());
-        holder.time.setText( offer.getTime());
-        holder.seats.setText( offer.getSeats());
-        holder.social.setText( offer.getSocial());
+        holder.age.setText( "Age : " + offer.getAge());
+        holder.number.setText( "Number : " + offer.getNumber());
+        holder.start.setText( "Meet Point : " + offer.getStart());
+        holder.destination.setText( "Destination : " + offer.getDestination());
+        holder.date.setText( "Date of Ride : " + offer.getDate());
+        holder.time.setText( "Leaving At : " + offer.getTime());
+        holder.seats.setText( "Number of Available Seats : " + offer.getSeats());
+        holder.social.setText( "Social : " + offer.getSocial());
 
 
         // We can attach an OnClickListener to the itemView of the holder;
         // itemView is a public field in the Holder class.
         // It will be called when the user taps/clicks on the whole item, i.e., one of
-        // the job leads shown.
+        // the offers shown.
         // This will indicate that the user wishes to edit (modify or delete) this item.
-        // We create and show an EditJobLeadDialogFragment.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -23,6 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is an activity class that lists all of the existing ride requests.
+ */
 public class ReviewRequest extends AppCompatActivity implements AddRequestDialogFragment.AddRequestDialogListener, EditRequestFragment.EditRequestListener {
     public static final String DEBUG_TAG = "ReviewRequest";
 
@@ -52,8 +55,7 @@ public class ReviewRequest extends AppCompatActivity implements AddRequestDialog
             }
         });
 
-
-
+        //initialize the request list
         requestList = new ArrayList<Request>();
 
         // use a linear layout manager for the recycler view
@@ -67,13 +69,13 @@ public class ReviewRequest extends AppCompatActivity implements AddRequestDialog
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("requests");
 
-
+        // Sets up a listener to receive a value for the database reference.
+        // The listener is called by Firebase by executing its onDataChange method
         myRef.addValueEventListener( new ValueEventListener() {
 
             @Override
             public void onDataChange( @NonNull DataSnapshot snapshot ) {
-                // Once we have a DataSnapshot object, we need to iterate over the elements and place them on our job lead list.
-                requestList.clear(); // clear the current content; this is inefficient!
+                requestList.clear();
                 for( DataSnapshot postSnapshot: snapshot.getChildren() ) {
                     Request request = postSnapshot.getValue(Request.class);
                     request.setKey( postSnapshot.getKey() );
@@ -83,7 +85,7 @@ public class ReviewRequest extends AppCompatActivity implements AddRequestDialog
                 }
 
                 Log.d( DEBUG_TAG, "ValueEventListener: notifying recyclerAdapter" );
-                //will update only item changed (it is smart enough to tell)
+                //will update only item changed
                 recyclerAdapter.notifyDataSetChanged();
             }
 
@@ -94,6 +96,7 @@ public class ReviewRequest extends AppCompatActivity implements AddRequestDialog
         } );
     }
 
+    // Adds a new request to the list of requests in Firebase
     public void addRequest(Request request) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -129,20 +132,23 @@ public class ReviewRequest extends AppCompatActivity implements AddRequestDialog
                 });
     }
 
-
+    /**
+     * This updates an already existing ride request. The update could either be an edit
+     * to the request or a deletion of the request.
+     * @param position
+     * @param request
+     * @param action
+     */
     public void updateRequest( int position, Request request, int action ) {
         if( action == EditRequestFragment.SAVE ) {
             Log.d( DEBUG_TAG, "Updating request for: " + position + "(" + request.getName() + ")" );
 
-            // Update the recycler view to show the changes in the updated job lead in that view
+            // Update the recycler view to show the changes in the updated request in that view
             recyclerAdapter.notifyItemChanged( position );
 
-            // Update this job lead in Firebase
-            // Note that we are using a specific key (one child in the list)
+            // Update this request in Firebase
             DatabaseReference ref = database.getReference().child( "requests" ).child( request.getKey() );
 
-            // This listener will be invoked asynchronously, hence no need for an AsyncTask class, as in the previous apps
-            // to maintain job leads.
             ref.addListenerForSingleValueEvent( new ValueEventListener() {
                 @Override
                 public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
@@ -167,10 +173,13 @@ public class ReviewRequest extends AppCompatActivity implements AddRequestDialog
         else if( action == EditRequestFragment.DELETE ) {
             Log.d( DEBUG_TAG, "Deleting" +  request.getName() + "'s Request" );
 
+            // removes a deleted ride request from the list
             requestList.remove( position );
 
+            // removes the ride request from the view
             recyclerAdapter.notifyItemRemoved( position );
 
+            // deletes the ride request in Firebase
             DatabaseReference ref = database
                     .getReference()
                     .child( "requests" )

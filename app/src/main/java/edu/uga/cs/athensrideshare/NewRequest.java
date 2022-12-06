@@ -72,15 +72,13 @@ public class NewRequest extends AppCompatActivity {
 
             final Request request = new Request(name, age, num, start, dest, date, time, seat, social, fuel );
 
-            // Add a new element (JobLead) to the list of job leads in Firebase.
+            // Add a new element (Request) to the list of requests in Firebase.
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference myRef = database.getReference("requests");
 
             // First, a call to push() appends a new node to the existing list (one is created
             // if this is done for the first time).  Then, we set the value in the newly created
-            // list node to store the new job lead.
-            // This listener will be invoked asynchronously, as no need for an AsyncTask, as in
-            // the previous apps to maintain job leads.
+            // list node to store the new request.
             myRef.push().setValue( request )
                     .addOnSuccessListener( new OnSuccessListener<Void>() {
                         @Override

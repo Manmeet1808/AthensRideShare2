@@ -23,6 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is an activity class that lists all of the available ride offers.
+ */
 public class ReviewOffer extends AppCompatActivity implements AddOfferDialogFragment.AddOfferDialogListener, EditOfferFragment.EditOfferListener {
     public static final String DEBUG_TAG = "ReviewOffer";
 
@@ -52,6 +55,7 @@ public class ReviewOffer extends AppCompatActivity implements AddOfferDialogFrag
             }
         });
 
+        // initialize the offer list
         offerList = new ArrayList<Offer>();
 
         // use a linear layout manager for the recycler view
@@ -65,13 +69,14 @@ public class ReviewOffer extends AppCompatActivity implements AddOfferDialogFrag
         database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("offers");
 
-
+        // Sets up a listener to receive a value for the database reference.
+        // The listener is called by Firebase by executing its onDataChange method
         myRef.addValueEventListener( new ValueEventListener() {
 
             @Override
             public void onDataChange( @NonNull DataSnapshot snapshot ) {
-                // Once we have a DataSnapshot object, we need to iterate over the elements and place them on our job lead list.
-                offerList.clear(); // clear the current content; this is inefficient!
+                // Once we have a DataSnapshot object, we need to iterate over the elements and place them on our offer list
+                offerList.clear();
                 for( DataSnapshot postSnapshot: snapshot.getChildren() ) {
                     Offer offer = postSnapshot.getValue(Offer.class);
                     offer.setKey( postSnapshot.getKey() );
@@ -81,7 +86,7 @@ public class ReviewOffer extends AppCompatActivity implements AddOfferDialogFrag
                 }
 
                 Log.d( DEBUG_TAG, "ValueEventListener: notifying recyclerAdapter" );
-                //will update only item changed (it is smart enough to tell)
+                //will update only item changed
                 recyclerAdapter.notifyDataSetChanged();
             }
 
@@ -92,6 +97,7 @@ public class ReviewOffer extends AppCompatActivity implements AddOfferDialogFrag
         } );
     }
 
+    // Adds a new offer to the list of offers in Firebase
     public void addOffer(Offer offer) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -107,7 +113,7 @@ public class ReviewOffer extends AppCompatActivity implements AddOfferDialogFrag
                         recyclerView.post( new Runnable() {
                             @Override
                             public void run() {
-                                recyclerView.smoothScrollToPosition( offerList.size()-1 );
+                                recyclerView.smoothScrollToPosition( offerList.size() -1 );
                             }
                         } );
 
@@ -127,20 +133,23 @@ public class ReviewOffer extends AppCompatActivity implements AddOfferDialogFrag
                 });
     }
 
-
+    /**
+     * This updates an already existing ride offer. The update could either be
+     * an edit to the offer or a deletion of the offer.
+     * @param position
+     * @param offer
+     * @param action
+     */
     public void updateOffer( int position, Offer offer, int action ) {
         if( action == EditOfferFragment.SAVE ) {
             Log.d( DEBUG_TAG, "Updating offer for: " + position + "(" + offer.getName() + ")" );
 
-            // Update the recycler view to show the changes in the updated job lead in that view
+            // Update the recycler view to show the changes in the updated offer in that view
             recyclerAdapter.notifyItemChanged( position );
 
-            // Update this job lead in Firebase
-            // Note that we are using a specific key (one child in the list)
+            // Update this offer in Firebase
             DatabaseReference ref = database.getReference().child( "offers" ).child( offer.getKey() );
 
-            // This listener will be invoked asynchronously, hence no need for an AsyncTask class, as in the previous apps
-            // to maintain job leads.
             ref.addListenerForSingleValueEvent( new ValueEventListener() {
                 @Override
                 public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
@@ -165,10 +174,13 @@ public class ReviewOffer extends AppCompatActivity implements AddOfferDialogFrag
         else if( action == EditOfferFragment.DELETE ) {
             Log.d( DEBUG_TAG, "Deleting" +  offer.getName() + "'s Offer" );
 
+            // removes a deleted ride offer from the list
             offerList.remove( position );
 
+            // removes the ride offer from the view
             recyclerAdapter.notifyItemRemoved( position );
 
+            // deletes the ride offer in Firebase
             DatabaseReference ref = database
                     .getReference()
                     .child( "offers" )

@@ -99,7 +99,7 @@ public class EditRequestFragment extends DialogFragment {
         socialText = layout.findViewById( R.id.editText9 );
         fuelText = layout.findViewById( R.id.editText10 );
 
-        // Pre-fill the edit texts with the current values for this job lead.
+        // Pre-fill the edit texts with the current values for this request.
         // The user will be able to modify them.
         nameText.setText(name);
         ageText.setText(age);
@@ -157,9 +157,9 @@ public class EditRequestFragment extends DialogFragment {
             Request request = new Request( name, age, phone, start, dest, date, time, seats, social, fuel );
             request.setKey( key );
 
-            // get the Activity's listener to add the new job lead
+            // get the Activity's listener to add the new request
             EditRequestListener listener = (EditRequestFragment.EditRequestListener) getActivity();
-            // add the new job lead
+            // add the new request
             listener.updateRequest( position, request, SAVE );
 
             // close the dialog
@@ -174,8 +174,8 @@ public class EditRequestFragment extends DialogFragment {
             Request request = new Request( name, age, phone, start, dest, date, time, seats, social, fuel );
             request.setKey( key );
 
-            // get the Activity's listener to add the new job lead
-            EditRequestFragment.EditRequestListener listener = (EditRequestFragment.EditRequestListener) getActivity();            // add the new job lead
+            // get the Activity's listener to add the new request
+            EditRequestFragment.EditRequestListener listener = (EditRequestFragment.EditRequestListener) getActivity();
             listener.updateRequest( position, request, DELETE );
             // close the dialog
             dismiss();

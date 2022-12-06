@@ -24,8 +24,8 @@ public class AddOfferDialogFragment extends DialogFragment {
     private EditText seatsView;
     private EditText socialView;
 
-    // This interface will be used to obtain the new job lead from an AlertDialog.
-    // A class implementing this interface will handle the new job lead, i.e. store it
+    // This interface will be used to obtain the new offer from an AlertDialog.
+    // A class implementing this interface will handle the new offer, i.e. store it
     // in Firebase and add it to the RecyclerAdapter.
     public interface AddOfferDialogListener {
         void addOffer(Offer offer);
@@ -71,7 +71,7 @@ public class AddOfferDialogFragment extends DialogFragment {
     private class AddOfferListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            // get the new job lead data from the user
+            // get the new offer data from the user
             String fullName = nameView.getText().toString();
             String age = ageView.getText().toString();
             String phone = phoneView.getText().toString();

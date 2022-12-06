@@ -87,15 +87,15 @@ public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecycler
 
 
         holder.name.setText( request.getName());
-        holder.age.setText( request.getAge());
-        holder.number.setText( request.getNumber());
-        holder.start.setText( request.getStart());
-        holder.destination.setText( request.getDestination());
-        holder.date.setText( request.getDate());
-        holder.time.setText( request.getTime());
-        holder.seats.setText( request.getSeats());
-        holder.social.setText( request.getSocial());
-        holder.fuel.setText( request.getSocial());
+        holder.age.setText( "Age : " + request.getAge());
+        holder.number.setText( "Phone Number : " + request.getNumber());
+        holder.start.setText( "Meet Point : " + request.getStart());
+        holder.destination.setText( "Destination : " + request.getDestination());
+        holder.date.setText( "Date of Ride : " + request.getDate());
+        holder.time.setText( "Leave At : " + request.getTime());
+        holder.seats.setText( "Number of Seats Needed : " + request.getSeats());
+        holder.social.setText( "Social : " + request.getSocial());
+        holder.fuel.setText( "Will Split on Fuel : " + request.getSocial());
 
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,9 +110,8 @@ public class requestRecyclerAdapter extends RecyclerView.Adapter<requestRecycler
         // We can attach an OnClickListener to the itemView of the holder;
         // itemView is a public field in the Holder class.
         // It will be called when the user taps/clicks on the whole item, i.e., one of
-        // the job leads shown.
+        // the requests shown.
         // This will indicate that the user wishes to edit (modify or delete) this item.
-        // We create and show an EditJobLeadDialogFragment.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
