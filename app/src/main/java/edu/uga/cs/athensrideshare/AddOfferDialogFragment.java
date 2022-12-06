@@ -67,6 +67,7 @@ public class AddOfferDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    //Creates an Offer object from the data input by the user
     private class AddOfferListener implements DialogInterface.OnClickListener {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -82,13 +83,13 @@ public class AddOfferDialogFragment extends DialogFragment {
             String social = socialView.getText().toString();
 
 
-            // create a new JobLead object
+            // create a new Offer object
             Offer offer = new Offer( fullName, age, phone, start, dest, date, time, seats, social );
 
-            // get the Activity's listener to add the new job lead
+            // get the Activity's listener to add the new offer
             AddOfferDialogListener listener = (AddOfferDialogListener) getActivity();
 
-            // add the new job lead
+            // add the new offer
             listener.addOffer( offer );
 
             // close the dialog
