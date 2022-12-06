@@ -23,6 +23,7 @@ public class homeScreen2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen2);
+        //hello
 
         Log.d( DEBUG_TAG, "homescreen.onCreate()" );
 
